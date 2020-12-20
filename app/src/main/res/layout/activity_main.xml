@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3E2DC"
+    tools:context=".NoteList"
+    android:padding="10dp">
+    <!-- 嵌套一个约束布局来管理两个悬浮按钮 -->
+    <TextView
+        android:paddingTop="30dp"
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="便签"
+        android:layout_marginLeft="3dp"
+        tools:ignore="MissingConstraints" />
+    <EditText
+        android:layout_margin="3dp"
+        android:drawableLeft="@drawable/select"
+        android:drawablePadding="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/select"
+        android:singleLine="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/select_style"
+        app:layout_constraintTop_toBottomOf="@+id/head"
+        android:hint="搜索"
+        android:textSize="30dp"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/select"
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <!-- 使用约束布局将该按钮定位到界面右下角 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:src="@drawable/add"
+        app:backgroundTint="#FFC107"
+        app:elevation="5dp"
+        app:fabCustomSize="70dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="30dp"
+        app:rippleColor="#e7d161" />
+</androidx.constraintlayout.widget.ConstraintLayout>

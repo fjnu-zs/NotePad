@@ -164,9 +164,138 @@ editText = findViewById(R.id.select);
     </style>
 ```
 然后在AndroidManifest.xml的activity的android:theme修改改为@style/AppTheme.NoActionBar，这样状态栏和标题栏就会被隐藏
-
+#### xml项目结构
+![](https://github.com/fjnu-zs/NotePad/blob/master/images/xml.png)
 且因为是我自己重写整个项目整个项目也会UI也是重中之重,下面展示一下主要的两个界面NoteList和Editor
+#### NoteList.xml
+``` java
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3E2DC"
+    tools:context=".NoteList"
+    android:padding="10dp">
+    <!-- 嵌套一个约束布局来管理两个悬浮按钮 -->
+    <TextView
+        android:paddingTop="30dp"
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"
+        android:text="便签"
+        android:layout_marginLeft="3dp"
+        tools:ignore="MissingConstraints" />
+    <EditText
+        android:layout_margin="3dp"
+        android:drawableLeft="@drawable/select"
+        android:drawablePadding="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/select"
+        android:singleLine="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/select_style"
+        app:layout_constraintTop_toBottomOf="@+id/head"
+        android:hint="搜索"
+        android:textSize="30dp"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/select"
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+    <!-- 使用约束布局将该按钮定位到界面右下角 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:src="@drawable/add"
+        app:backgroundTint="#FFC107"
+        app:elevation="5dp"
+        app:fabCustomSize="70dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="30dp"
+        app:rippleColor="#e7d161" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
 ![](https://github.com/fjnu-zs/NotePad/blob/master/images/getdate2.jpg)
+#### Editor.xml
+``` java
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Editor"
+    android:padding="10dp"
+    android:background="#fff"
+    android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button">
+        <Button
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:drawableLeft="@drawable/no"
+            android:background="@null"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:ignore="MissingConstraints" />
+        <Button
+            android:layout_marginEnd="20dp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1"
+            android:background="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:drawableRight="@drawable/yes"
+            android:layout_marginRight="0dp"
+            android:onClick="onClick"
+
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/editorTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="标题"
+        android:textSize="35dp"
+        android:background="@null"
+        android:textCursorDrawable="@drawable/cursor_color"
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editorNote"
+        android:layout_marginTop="10dp"
+        android:gravity="top"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:singleLine="false"
+        android:hint="文本"
+        android:background="@null"
+        android:textSize="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/editorTitle"
+        />
+</LinearLayout>
+```
 ![](https://github.com/fjnu-zs/NotePad/blob/master/images/editor.jpg)
 
 ### 2.实现瀑布流
